@@ -1,0 +1,145 @@
+export interface Doctor {
+  slug: string;
+  name: string;
+  qualifications: string;
+  specialty: string;
+  departmentSlug?: string;
+  photo: string;
+  /** true = photo is a real personal headshot; false = a generic placeholder from the source site */
+  hasRealPhoto: boolean;
+  verified: boolean;
+}
+
+export const doctors: Doctor[] = [
+  {
+    slug: "ajay-dombale",
+    name: "Dr. Ajay Dombale",
+    qualifications: "MBBS, DNB (Ortho)",
+    specialty: "Joint Replacement & Reconstruction Surgeries",
+    departmentSlug: "orthopedics",
+    photo: "dombale.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "swati-anjikar",
+    name: "Dr. Swati Anjikar",
+    qualifications: "MBBS, M.S., D.N.B. (OBGY), MRCOG (London)",
+    specialty: "Laparoscopy, In Vitro Fertilisation (IVF)",
+    photo: "anjikar.jpeg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "manoj-deshmukh",
+    name: "Dr. Manoj Deshmukh",
+    qualifications: "MBBS, MS (ENT)",
+    specialty: "Endoscopic ENT Surgeon",
+    photo: "deshmukh.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "ganesh-mundhe",
+    name: "Dr. Ganesh Mundhe",
+    qualifications: "MBBS, MS (Ortho)",
+    specialty: "Spine Surgeon",
+    departmentSlug: "orthopedics",
+    photo: "gmundhe.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "sunil-khot",
+    name: "Dr. Sunil Khot",
+    qualifications: "MBBS, DNB (Nephro)",
+    specialty: "Nephrologist, Renal Replacement and Transplant, Renal Medicine",
+    departmentSlug: "internal-medicine",
+    photo: "khot.png",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "amit-yele",
+    name: "Dr. Amit Yele",
+    qualifications: "MBBS, MD (Med), DNB (Med)",
+    specialty: "Diabetologist, Rheumatologist, Physician and Intensive Care",
+    departmentSlug: "internal-medicine",
+    photo: "yele.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "sachin-naik",
+    name: "Dr. Sachin Naik",
+    qualifications: "MBBS, MS (Gen Surgery), D. Lap. FMAS",
+    specialty: "Open and Laparoscopic Surgeries",
+    photo: "naik.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "devendra-satpute",
+    name: "Dr. Devendra Satpute",
+    qualifications: "MBBS, DCH",
+    specialty: "Paediatrician and Neonatologist",
+    departmentSlug: "pediatrics",
+    photo: "satpute.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "shankar-mundhe",
+    name: "Dr. Shankar Mundhe",
+    qualifications: "MBBS, MS (Gen Surgery), MCH (Urology)",
+    specialty: "Urologist & Uro Surgeon",
+    photo: "mundhe.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "nandkishor-raut",
+    name: "Dr. Nandkishor Raut",
+    qualifications: "MBBS, MS (Urology)",
+    specialty: "Uro-Surgeon",
+    photo: "raut.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "ashish-ubhale",
+    name: "Dr. Ashish Ubhale",
+    qualifications: "MBBS, MD (Psy.)",
+    specialty: "Consultant Medical Psychiatrist and Psychotherapist",
+    photo: "ubhale.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "sachin-vitnor",
+    name: "Dr. Sachin Vitnor",
+    qualifications: "MBBS, MS (Gynec-Obs)",
+    specialty: "Gynaecologist, Obstetric Surgeon",
+    photo: "vitnor.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "amol-walke",
+    name: "Dr. Amol Walke",
+    qualifications: "MBBS, DOMS",
+    specialty: "Eye Specialist",
+    photo: "walke.jpg",
+    hasRealPhoto: true,
+    verified: true,
+  },
+  {
+    slug: "amit-morey",
+    name: "Dr. Amit Morey",
+    qualifications: "MBBS, DNB (ENT)",
+    specialty: "Advanced Endoscopic Procedures",
+    photo: "ENT.jpg",
+    hasRealPhoto: false,
+    verified: true,
+  },
+];

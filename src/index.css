@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  /* Deep clinical teal/navy — primary */
+  --color-primary-50: #eef4f4;
+  --color-primary-100: #d3e3e3;
+  --color-primary-200: #a7c7c8;
+  --color-primary-300: #6fa2a4;
+  --color-primary-400: #3e7c7f;
+  --color-primary-500: #235f62;
+  --color-primary-600: #184a4d;
+  --color-primary-700: #123a3c;
+  --color-primary-800: #0f3d3e;
+  --color-primary-900: #0a2829;
+  --color-primary-950: #061a1b;
+
+  /* Terracotta/coral accent — reserved for CTAs */
+  --color-accent-50: #fdf2ee;
+  --color-accent-100: #fbe0d5;
+  --color-accent-200: #f6bfa8;
+  --color-accent-300: #ef9871;
+  --color-accent-400: #e6753f;
+  --color-accent-500: #d9612f;
+  --color-accent-600: #b84e24;
+  --color-accent-700: #933d1c;
+  --color-accent-800: #6f2e15;
+  --color-accent-900: #4d2010;
+
+  /* Warm neutrals */
+  --color-cream-50: #fbfaf7;
+  --color-cream-100: #f5f2ec;
+  --color-cream-200: #ece6da;
+  --color-ink-900: #1c1815;
+  --color-ink-700: #3f3a36;
+  --color-ink-500: #6b655f;
+  --color-ink-300: #a39c94;
+
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream-50 text-ink-700 font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-ink-900;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
