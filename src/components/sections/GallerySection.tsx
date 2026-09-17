@@ -31,7 +31,7 @@ export function GallerySection() {
         </div>
 
         <div className="relative flex flex-1 items-center justify-center overflow-hidden">
-          <div className="relative h-[320px] w-full max-w-[260px] sm:h-[360px] sm:max-w-[300px]">
+          <div className="relative h-[280px] w-[200px] sm:h-[320px] sm:w-[240px]">
             {galleryImages.map((image, i) => (
               <GalleryCard
                 key={image}
@@ -68,23 +68,19 @@ function GalleryCard({
   progress: ReturnType<typeof useScroll>["scrollYProgress"];
   reduceMotion: boolean;
 }) {
-  // Deeper cards (higher index) travel less — the parallax that makes the
-  // pile read as a fan rather than a single sliding block.
-  const depth = (index + 1) / total;
-  const direction = index % 2 === 0 ? 1 : -1;
+  // Index position relative to the centre card — drives how far each card
+  // fans out left/right so the full spread is wide enough to actually
+  // separate and reveal every photo, not just drift a few px apart.
+  const centered = index - (total - 1) / 2;
 
-  const x = useTransform(progress, [0, 1], [0, direction * depth * 130]);
-  const y = useTransform(progress, [0, 1], [0, -depth * 50]);
-  const rotate = useTransform(
-    progress,
-    [0, 1],
-    [(index - total / 2) * 1.5, direction * (6 + depth * 8)],
-  );
+  const x = useTransform(progress, [0, 1], [0, centered * 118]);
+  const y = useTransform(progress, [0, 1], [0, Math.abs(centered) * 20 - 55]);
+  const rotate = useTransform(progress, [0, 1], [centered * 1, centered * 6]);
 
   const baseStyle = {
-    zIndex: total - index,
-    left: index * 6,
-    top: index * -4,
+    zIndex: total - Math.abs(centered),
+    left: index * 5,
+    top: index * -3,
   };
 
   if (reduceMotion) {

@@ -8,11 +8,11 @@ export function DepartmentCard({ department }: { department: Department }) {
   return (
     <Link
       to={`/departments/${department.slug}`}
-      className="flex h-[300px] w-64 shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-ink-900/5 bg-white shadow-sm"
+      className="flex h-[360px] w-64 shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-ink-900/5 bg-white shadow-sm"
     >
       <motion.div
         layoutId={`dept-photo-${department.slug}`}
-        className="aspect-[4/3] shrink-0 overflow-hidden bg-primary-100"
+        className="aspect-[3/2] shrink-0 overflow-hidden bg-primary-100"
       >
         <img
           src={hospitalImage(department.image)}
@@ -27,7 +27,7 @@ export function DepartmentCard({ department }: { department: Department }) {
         >
           {department.name}
         </motion.h3>
-        <p className="mt-2 line-clamp-3 text-sm text-ink-500">{department.shortBlurb}</p>
+        <p className="mt-2 line-clamp-5 text-sm text-ink-500">{department.shortBlurb}</p>
       </div>
     </Link>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import type { Department } from "@/data/departments";
@@ -21,6 +21,13 @@ const SPRING = { type: "spring" as const, stiffness: 190, damping: 28, mass: 0.9
  * Each card links through to its detail page, and its photo/name share a
  * layoutId with that page's hero so the navigation reads as the card
  * morphing into the page.
+ *
+ * Which card is "active" is driven by the pointer's raw X position across
+ * the whole container (like a macOS dock), not by per-card mouseenter —
+ * cards physically move as they fan out, so listening on the cards
+ * themselves means the element under the cursor keeps changing mid-hover,
+ * causing the active card to flicker/fight itself. Tracking the container
+ * instead keeps activation stable regardless of how far things have moved.
  */
 export function OrbitCardStack({
   items,
@@ -31,9 +38,20 @@ export function OrbitCardStack({
   const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
   const center = (items.length - 1) / 2;
 
+  function handlePointerMove(e: MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relativeX = e.clientX - rect.left;
+    const index = Math.min(
+      items.length - 1,
+      Math.max(0, Math.floor((relativeX / rect.width) * items.length)),
+    );
+    setActiveIndex(index);
+  }
+
   return (
     <div
-      className="relative mx-auto flex h-[360px] w-full max-w-3xl items-center justify-center"
+      className="relative mx-auto flex h-[440px] w-full max-w-3xl items-center justify-center"
+      onMouseMove={handlePointerMove}
       onMouseLeave={() => setActiveIndex(defaultActiveIndex)}
     >
       {items.map((dept, index) => {
@@ -52,18 +70,17 @@ export function OrbitCardStack({
             style={{ zIndex: isActive ? 50 : 10 + (items.length - Math.abs(distanceFromActive)) }}
             animate={{ x, y, rotate: isActive ? 0 : rotate, scale: isActive ? 1.06 : 1 }}
             transition={SPRING}
-            onMouseEnter={() => setActiveIndex(index)}
             onFocus={() => setActiveIndex(index)}
           >
             <Link to={`/departments/${dept.slug}`} className="block" tabIndex={isActive ? 0 : -1}>
               <div
-                className={`flex h-[300px] flex-col overflow-hidden rounded-3xl border border-ink-900/5 bg-white shadow-lg transition-shadow duration-300 ${
+                className={`flex h-[360px] flex-col overflow-hidden rounded-3xl border border-ink-900/5 bg-white shadow-lg transition-shadow duration-300 ${
                   isActive ? "shadow-2xl" : ""
                 }`}
               >
                 <motion.div
                   layoutId={`dept-photo-${dept.slug}`}
-                  className="aspect-[4/3] shrink-0 overflow-hidden bg-primary-100"
+                  className="aspect-[3/2] shrink-0 overflow-hidden bg-primary-100"
                 >
                   <img
                     src={hospitalImage(dept.image)}
@@ -81,7 +98,7 @@ export function OrbitCardStack({
                   <motion.p
                     animate={{ opacity: isActive ? 1 : 0 }}
                     transition={{ duration: 0.25, delay: isActive ? 0.15 : 0 }}
-                    className="mt-2 line-clamp-3 text-sm text-ink-500"
+                    className="mt-2 line-clamp-5 text-sm text-ink-500"
                   >
                     {dept.shortBlurb}
                   </motion.p>
